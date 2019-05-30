@@ -6,6 +6,7 @@ import 'package:qr_reader_app/src/models/scan_model.dart';
 import 'package:qr_reader_app/src/pages/direcciones_page.dart';
 import 'package:qr_reader_app/src/pages/mapas_page.dart';
 import 'package:qr_reader_app/src/utils/utils.dart' as utils;
+import 'package:qrcode_reader/qrcode_reader.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -43,22 +44,17 @@ class _HomePageState extends State<HomePage> {
     // http://google.com
     // geo:40.72111069314909,-73.75050917109377
 
-    // String futureString = '';
-    String futureString = 'http://google.com';
+    String futureString;
 
-    /*try {
+    try {
       futureString = await QRCodeReader().scan();
     } catch (e) {
       futureString = e.toString();
-    }*/
+    }
 
     if (futureString != null) {
       final scan = ScanModel(valor: futureString);
       scansBloc.agregarScan(scan);
-
-      final scan2 =
-          ScanModel(valor: 'geo:40.72111069314909,-73.75050917109377');
-      scansBloc.agregarScan(scan2);
 
       if (Platform.isIOS) {
         Future.delayed(Duration(microseconds: 750), () {
